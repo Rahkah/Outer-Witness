@@ -1,0 +1,46 @@
+# --- Unity Standard Ignore ---
+/Library/
+/Temp/
+/Obj/
+/Build/
+/Builds/
+/Logs/
+/MemoryCaptures/
+/UserSettings/
+
+# 忽略 Unity 自动生成的项目文件
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# 忽略 Unity 资源导入产生的备份/残留
+AssetStoreTools*
+
+# 忽略系统文件
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- IDE Specific Ignore ---
+.vs/
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# --- Crashlytics / Analytics ---
+crashlytics-build.properties
+
+# --- UPM (Unity Package Manager) ---
+# 忽略包管理器的临时下载，但保留 manifest.json
+/Packages/manifest-lock.json
