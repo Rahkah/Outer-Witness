@@ -46,18 +46,6 @@ namespace OuterWitness.Orbit
         // --- 向后兼容与旧数据迁移 ---
         [HideInInspector] [SerializeField] private float semiMinorAxis = -1f; 
 
-        private void Awake()
-        {
-            // 如果存在旧的 semiMinorAxis 数据且尚未迁移过
-            if (semiMinorAxis > 0)
-            {
-                // e = sqrt(1 - (b^2 / a^2))
-                float ratio = semiMinorAxis / semiMajorAxis;
-                eccentricity = Mathf.Sqrt(Mathf.Abs(1f - ratio * ratio));
-                semiMinorAxis = -1f; // 标记迁移完成
-            }
-        }
-
         // 内部缓存用于 OrbitSystem 排序
         [HideInInspector] public int dependencyDepth = 0;
 
@@ -117,10 +105,19 @@ namespace OuterWitness.Orbit
 
         private void OnValidate()
         {
-            // 1. 强制约束 a > 0
+            // 1. 处理旧数据迁移 (仅在检测到旧字段有值时执行一次)
+            if (semiMinorAxis > 0)
+            {
+                float ratio = semiMinorAxis / semiMajorAxis;
+                eccentricity = Mathf.Sqrt(Mathf.Abs(1f - ratio * ratio));
+                semiMinorAxis = -1f; // 标记迁移完成，不再触发
+                Debug.Log($"[OrbitBody] 已自动将旧的短半轴数据转换为偏心率: {eccentricity:F4}", gameObject);
+            }
+
+            // 2. 强制约束 a > 0
             semiMajorAxis = Mathf.Max(0.1f, semiMajorAxis);
 
-            // 2. 强制约束 0 <= e < 1 (Range 已经处理，此处做双重保险)
+            // 3. 强制约束 0 <= e < 1
             eccentricity = Mathf.Clamp(eccentricity, 0f, 0.99f);
             
             if (Application.isPlaying && OrbitSystem.Instance != null)

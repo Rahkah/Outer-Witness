@@ -20,6 +20,16 @@ namespace OuterWitness.Orbit
             else Destroy(gameObject);
         }
 
+        private void Start()
+        {
+            // 兜底方案：启动时扫描场景中所有的 OrbitBody
+            OrbitBody[] bodies = FindObjectsOfType<OrbitBody>();
+            foreach (var b in bodies)
+            {
+                RegisterBody(b);
+            }
+        }
+
         public void RegisterBody(OrbitBody body)
         {
             if (!_orbitBodies.Contains(body))
