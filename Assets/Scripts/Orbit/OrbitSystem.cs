@@ -49,7 +49,7 @@ namespace OuterWitness.Orbit
 
         public void MarkDirty() => _isDirty = true;
 
-        private void Update()
+        private void FixedUpdate()
         {
             // 1. 如果列表发生了变动，重新计算依赖层级并排序
             if (_isDirty)
@@ -59,7 +59,7 @@ namespace OuterWitness.Orbit
             }
 
             // 2. 集中统一更新坐标
-            float time = Time.time;
+            float time = Time.fixedTime;
             for (int i = 0; i < _orbitBodies.Count; i++)
             {
                 UpdateOrbitPosition(_orbitBodies[i], time);
