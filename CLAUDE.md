@@ -44,11 +44,13 @@ Planetary gravity uses custom physics (not Unity's built-in gravity) to support 
 
 ### Player Controller
 
-Three-component system for player movement:
+Multi-component system for player movement and abilities:
 
 - **PlayerController** (`Assets/Scripts/Player/PlayerController.cs`): Input handling and camera rotation (yaw/pitch). Uses new Input System with `OnMove`, `OnLook`, `OnJump` callbacks.
 - **MovementController** (`Assets/Scripts/Player/MovementController.cs`): Physics-based movement on planetary surfaces. Uses local-space movement (forward/right) that automatically aligns with gravity direction.
 - **GravityController**: See above
+- **SpaceSuit** (`Assets/Scripts/Player/SpaceSuit.cs`): Manages jetpack fuel system with depletion, recharging, and events for UI updates.
+- **JetpackController** (`Assets/Scripts/Player/JetpackController.cs`): Handles vertical thrust (Shift/Ctrl) using SpaceSuit fuel.
 
 ### Lighting System
 
@@ -57,6 +59,18 @@ Dynamic solar lighting that tracks celestial positions:
 - **SunController** (`Assets/Scripts/Light/SunController.cs`): Manages sun's emissive material using HDR colors.
 - **SolarLightSynchronizer** (`Assets/Scripts/Light/SolarLightSynchronizer.cs`): Keeps Directional Light aligned from sun toward reference point (usually player). Uses `LateUpdate` to reduce shadow jitter.
 - **PlanetRotation** (`Assets/Scripts/Light/PlanetRotation.cs`): Simple self-rotation for day/night cycles.
+
+### HUD & UI System
+
+Space navigation and suit status displays:
+
+- **SpaceNavigator** (`Assets/Scripts/PlayerTools/SpaceNavigator.cs`): Space navigation HUD that tracks celestial bodies, displays distance/approach speed, and shows velocity arrows. Features:
+  - Tab toggles HUD visibility
+  - Left-click locks/unlocks target tracking
+  - Automatic celestial body suggestion via raycast
+  - Velocity arrows indicate relative movement direction
+  - Distance display switches between m/km based on threshold
+- **SpaceSuitStatus** (`Assets/Scripts/UI/SpaceSuitStatus.cs`): Displays jetpack fuel level via arc-shaped UI element. Subscribes to SpaceSuit fuel change events.
 
 ## Code Conventions
 
@@ -73,6 +87,17 @@ Dynamic solar lighting that tracks celestial positions:
 3. **Physics Settings**:
    - Fixed Timestep: 0.01-0.02s (tuned for high-speed space travel)
    - Player rigidbody: `useGravity = false`, `interpolation = Interpolate`, `freezeRotation = true`
+
+## Controls
+
+- **WASD**: Movement on planetary surfaces
+- **Mouse**: Camera rotation (yaw/pitch)
+- **Space**: Jump
+- **Shift**: Jetpack thrust upward
+- **Ctrl**: Jetpack thrust downward
+- **Q/E**: Space-only roll adjustment (when not in gravity field)
+- **Tab**: Toggle space navigation HUD
+- **Left-click**: Lock/unlock celestial body tracking in HUD
 
 ## Known Limitations & Future Work
 

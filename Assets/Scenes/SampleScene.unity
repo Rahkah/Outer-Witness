@@ -366,9 +366,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1477277875}
-  - {fileID: 577560718}
-  - {fileID: 1669924276}
+  - {fileID: 745231442}
   - {fileID: 58293449}
   - {fileID: 756225318}
   m_Father: {fileID: 0}
@@ -1137,14 +1135,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577560717}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 777801733}
   - {fileID: 360734616}
-  m_Father: {fileID: 194186686}
+  m_Father: {fileID: 745231442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1562,6 +1560,59 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &745231441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 745231442}
+  - component: {fileID: 745231443}
+  m_Layer: 5
+  m_Name: SpaceSuitStatus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &745231442
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745231441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1477277875}
+  - {fileID: 577560718}
+  - {fileID: 1669924276}
+  m_Father: {fileID: 194186686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -808.35, y: 670.10474}
+  m_SizeDelta: {x: 303.3, y: 307}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &745231443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745231441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fe8a9d4f2e3c9428db43d7d8386b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spaceSuit: {fileID: 781148738}
+  fuelArc: {fileID: 360734617}
 --- !u!1 &756225317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,7 +1689,9 @@ MonoBehaviour:
   kmThreshold: 5000
   cursorPadding: 20
   arrowMaskHalfSize: 100
-  arrowMaxSpeed: 1
+  arrowMaxSpeed: 50
+  arrowDefaultPos: -995
+  arrowMaxPos: -904
 --- !u!43 &756761558
 Mesh:
   m_ObjectHideFlags: 0
@@ -1838,7 +1891,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -995, y: 0}
+  m_AnchoredPosition: {x: -904.5, y: -0}
   m_SizeDelta: {x: 1908, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &776396959
@@ -1965,9 +2018,12 @@ GameObject:
   - component: {fileID: 781148731}
   - component: {fileID: 781148732}
   - component: {fileID: 781148733}
+  - component: {fileID: 781148738}
+  - component: {fileID: 781148740}
   - component: {fileID: 781148735}
   - component: {fileID: 781148736}
   - component: {fileID: 781148737}
+  - component: {fileID: 781148739}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -2097,6 +2153,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &781148738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781148730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92016b3b85f259b418d1e8b21468904a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxFuel: 100
+  fuelDepletionPerSecond: 8
+  fuelRechargePerSecond: 4
+  rechargeDelay: 1
+  thrusterForce: 12
+--- !u!114 &781148739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781148730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92016b3b85f259b418d1e8b21468904a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxFuel: 100
+  fuelDepletionPerSecond: 8
+  fuelRechargePerSecond: 4
+  rechargeDelay: 1
+  thrusterForce: 12
+--- !u!114 &781148740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781148730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d000c646837c874f82e12680bf48d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &787550115
 GameObject:
   m_ObjectHideFlags: 0
@@ -3349,12 +3451,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477277874}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 194186686}
+  m_Father: {fileID: 745231442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -3505,14 +3607,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1669924275}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1043747148}
   - {fileID: 921805514}
-  m_Father: {fileID: 194186686}
+  m_Father: {fileID: 745231442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
