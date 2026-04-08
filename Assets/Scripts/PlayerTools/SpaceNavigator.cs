@@ -52,6 +52,10 @@ namespace OuterWitness.PlayerTools
         [SerializeField] private float arrowMaskHalfSize = 100f;
         [Tooltip("速度达到此值时箭头完全露出（m/s）")]
         [SerializeField] private float arrowMaxSpeed = 20f;
+        [Tooltip("速度为 0 时箭头头部刚好露出的初始 PosX（通常为负值，约等于 -(箭头长度/2)）")]
+        [SerializeField] private float arrowDefaultPos = -995f;
+        [Tooltip("箭头 PosX 上限，超过此值会出 mask 范围")]
+        [SerializeField] private float arrowMaxPos = -904f;
 
         private PlanetGravity _lockedBody;
         private float _previousDistance;
@@ -272,12 +276,11 @@ namespace OuterWitness.PlayerTools
 
         private string GetVelocityText()
         {
-            // PlanetGravity 没有 Rigidbody，视天体为静止，只用玩家速度
-            float speed = player.velocity.magnitude;
             float currentDist = (player.position - _lockedBody.transform.position).magnitude;
-            string sign = _previousDistance < currentDist ? "-" : "";
+            float approachSpeed = (_previousDistance - currentDist) / Time.fixedDeltaTime;
             _previousDistance = currentDist;
-            return $"{sign}{speed:####0}m/s";
+            string sign = approachSpeed < 0 ? "-" : "";
+            return $"{sign}{Mathf.Abs(approachSpeed):####0}m/s";
         }
 
         // ─────────────────────────────────────────────
@@ -291,7 +294,7 @@ namespace OuterWitness.PlayerTools
             float rollAngle = player.transform.rotation.eulerAngles.z;
             vel = Quaternion.Euler(0, 0, -rollAngle) * vel;
 
-            // 四个箭头全部沿 localPosition.x 移动，与 mask 横向裁剪方向一致
+            // 四个箭头全部沿 X 轴移动（mask 均为横向裁剪）
             rightVelocityArrow.transform.localPosition  = new Vector3(ArrowLocalPos( vel.x), 0, 0);
             leftVelocityArrow.transform.localPosition   = new Vector3(ArrowLocalPos(-vel.x), 0, 0);
             topVelocityArrow.transform.localPosition    = new Vector3(ArrowLocalPos( vel.y), 0, 0);
@@ -299,13 +302,15 @@ namespace OuterWitness.PlayerTools
         }
 
         /// <summary>
-        /// 箭头默认完全隐藏在 mask 外（-arrowMaskHalfSize），
-        /// 速度分量为正时向 mask 内移动，速度达到 arrowMaxSpeed 时完全露出。
+        /// 速度为 0 时箭头头部刚好露出（arrowDefaultPos），
+        /// 速度增大时向正方向移动，线部逐渐滑入 mask 可见区域。
         /// </summary>
         private float ArrowLocalPos(float velocityComponent)
         {
-            float reveal = Mathf.Clamp01(velocityComponent / arrowMaxSpeed) * arrowMaskHalfSize * 2f;
-            return -arrowMaskHalfSize + reveal;
+            float t = Mathf.Clamp01(velocityComponent / arrowMaxSpeed);
+            t = Mathf.Sqrt(t); // 平方根让低速段更不敏感
+            float pos = arrowDefaultPos + t * (arrowMaxPos - arrowDefaultPos);
+            return pos;
         }
     }
 }

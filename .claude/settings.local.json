@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git add \"CLAUDE.md\")"
+      "Bash(git add \"CLAUDE.md\")",
+      "Bash(git add Assets/Scenes/SampleScene.unity Assets/Scripts/PlayerTools/SpaceNavigator.cs)"
     ],
     "deny": [],
     "ask": []

@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 419441420}
   - component: {fileID: 419441419}
   - component: {fileID: 419441423}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Attlerock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1335,7 +1335,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -991.7, y: 0}
+  m_AnchoredPosition: {x: -995, y: 0}
   m_SizeDelta: {x: 1908, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &675992805
@@ -1637,6 +1637,8 @@ MonoBehaviour:
   canvasRect: {fileID: 0}
   kmThreshold: 5000
   cursorPadding: 20
+  arrowMaskHalfSize: 100
+  arrowMaxSpeed: 1
 --- !u!43 &756761558
 Mesh:
   m_ObjectHideFlags: 0
@@ -1836,7 +1838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -996, y: 0}
+  m_AnchoredPosition: {x: -995, y: 0}
   m_SizeDelta: {x: 1908, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &776396959
@@ -2020,7 +2022,7 @@ MonoBehaviour:
   walkSpeed: 6
   runSpeed: 10
   acceleration: 50
-  jumpForce: 5
+  jumpForce: 3
 --- !u!114 &781148735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2749,7 +2751,7 @@ GameObject:
   - component: {fileID: 1237831762}
   - component: {fileID: 1237831765}
   - component: {fileID: 1237831761}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2892,7 +2894,7 @@ GameObject:
   - component: {fileID: 1264799543}
   - component: {fileID: 1264799542}
   - component: {fileID: 1264799541}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TimberHearth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
