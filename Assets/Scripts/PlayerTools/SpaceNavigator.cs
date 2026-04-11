@@ -65,7 +65,7 @@ namespace OuterWitness.PlayerTools
         {
             suggestCursor.SetActive(false);
             lockCursor.SetActive(false);
-            _hudVisible = false;
+            SetHudVisible(true);
         }
 
         private void Update()
@@ -108,6 +108,9 @@ namespace OuterWitness.PlayerTools
                 suggestCursor.SetActive(false);
             }
         }
+
+        /// <summary>供外部（如飞船交互）强制设置 HUD 显隐。</summary>
+        public void ForceSetHudVisible(bool visible) => SetHudVisible(visible);
 
         // ─────────────────────────────────────────────
         // 建议逻辑

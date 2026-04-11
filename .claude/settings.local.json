@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(git add \"CLAUDE.md\")",
-      "Bash(git add Assets/Scenes/SampleScene.unity Assets/Scripts/PlayerTools/SpaceNavigator.cs)"
+      "Bash(git add Assets/Scenes/SampleScene.unity Assets/Scripts/PlayerTools/SpaceNavigator.cs)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: improve SpaceNavigator HUD with velocity arrows and approach speed\n\n- Add velocity arrows that show player movement direction relative to locked body\n- Calculate approach speed instead of absolute speed for more useful info\n- Improve arrow positioning with configurable start/end positions\n- Add square root curve for better low-speed sensitivity\n- Update scene with new HUD settings\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git add CLAUDE.md Assets/Scenes/SampleScene.unity Assets/Scripts/Player/JetpackController.cs)",
+      "Bash(git commit -m \"$(cat <<''EOF''\ndocs: update CLAUDE.md with new systems and controls\n\n- Add SpaceSuit and JetpackController to player systems\n- Add HUD & UI System section with SpaceNavigator and SpaceSuitStatus\n- Add Controls section documenting all player inputs\n- Document space-only roll adjustment with Q/E\n- Include scene changes for new HUD components\n\n🤖 Generated with [Claude Code](https://claude.ai/code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

@@ -15,6 +15,7 @@ namespace OuterWitness.Player
 
         public Vector2 MoveInput { get; private set; }
         public bool JumpRequest { get; private set; }
+        public bool InteractRequest { get; private set; }
 
         private Vector2 _lookInput;
         private float _pitch; // 仅记录俯仰角
@@ -53,6 +54,14 @@ namespace OuterWitness.Player
             }
         }
 
+        public void OnInteract(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                InteractRequest = true;
+            }
+        }
+
         private void Update()
         {
             HandleRotation();
@@ -65,6 +74,30 @@ namespace OuterWitness.Player
         {
             JumpRequest = false;
         }
+
+        /// <summary>
+        /// 供外部调用，在处理完交互逻辑后清除请求。
+        /// </summary>
+        public void ConsumeInteractRequest()
+        {
+            InteractRequest = false;
+        }
+
+        /// <summary>
+        /// 切换相机旋转目标（进入/退出飞船时调用）。
+        /// </summary>
+        public void SetCameraTarget(Transform newTarget)
+        {
+            cameraTarget = newTarget;
+            if (cameraTarget != null)
+            {
+                _pitch = cameraTarget.localEulerAngles.x;
+                if (_pitch > 180f) _pitch -= 360f;
+            }
+        }
+
+        /// <summary>返回当前 CameraTarget，供外部缓存。</summary>
+        public Transform GetCameraTarget() => cameraTarget;
 
         private void HandleRotation()
         {

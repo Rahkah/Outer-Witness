@@ -18,6 +18,9 @@ namespace OuterWitness.Player
         public bool IsGrounded { get; private set; }
         public Vector3 GravityDirection { get; private set; } = Vector3.down;
 
+        /// <summary>进入飞船时设为 true，暂停所有重力/对齐物理，玩家跟随飞船移动。</summary>
+        public bool IsPassenger { get; set; }
+
         private Rigidbody _rb;
         private Vector3 _lastPlanetPosition;
         private Quaternion _lastPlanetRotation;
@@ -38,6 +41,14 @@ namespace OuterWitness.Player
 
         private void FixedUpdate()
         {
+            if (IsPassenger)
+            {
+                // 在飞船内：同步 Rigidbody 位置到 Transform（由飞船父子关系驱动）
+                _rb.position = transform.position;
+                _rb.rotation = transform.rotation;
+                return;
+            }
+
             SyncReferenceFrame();
             FindClosestPlanet();
             ApplyGravity();
